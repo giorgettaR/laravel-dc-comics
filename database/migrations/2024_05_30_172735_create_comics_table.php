@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('artists', 500);
             $table->string('writers', 500);
             $table->date('sale_date');
+            $table->date('updated_at');
+            $table->date('created_At');
         });
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Comics - DC-Comics')
+@section('title',' DC-Comics')
 
 @section('content')
 
@@ -13,11 +13,13 @@
       </div>
     </div>
     <div class="row">
-      @foreach($comics as $comic)
-      <div class="col-3 p-2" >
+      <div class="col-3">
+        <div class="card p-2">
+          <img class="d-block card-img-top" src="{{ $comic['thumb'] }}" alt="..." style="height: 350px">
+        </div>
+      </div>
+      <div class="col-9 p-2" >
         <div class="card">
-        
-            <img class="d-block card-img-top" src="{{ $comic['thumb'] }}" alt="..." style="height: 350px">
           <div class="card-body">
             <h5 class="card-title">{{ $comic['title'] }}</h5>
             <p class="card-text" style="height: 200px; overflow: auto;">{{ $comic['description'] }}</p>
@@ -33,7 +35,6 @@
           </div>
         </div>
       </div>
-      @endforeach
 </div>
 </main>
 @endsection
