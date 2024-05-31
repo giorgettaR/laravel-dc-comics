@@ -10,6 +10,7 @@
     <div class="row">
       <div class="col-12">
         <h1 class="p-2">Comics</h1>
+        <a href="{{ route('comics.create') }}" class="btn btn-primary">New Comic</a>
       </div>
     </div>
     <div class="row">
@@ -30,6 +31,12 @@
           <div class="card-body">
             <a href="#" class="card-link">Artists</a>
             <a href="#" class="card-link">Writers</a>
+            <a href="{{ route('comics.edit',$comic) }}" class="card-link">Edit</a>
+            <form action="{{ route('comics.destroy',$comic) }}" method="POST">
+              @method('DELETE')
+              @csrf
+              <button class="btn btn-link link-danger">Trash</button>
+            </form>
           </div>
         </div>
       </div>

@@ -10,7 +10,8 @@ class ComicController extends Controller
     public function index()
     {
 
-        $comics = config('comics');
+        // $comics = config('comics');
+        $comics = Comic::all();
 
         return view('comics.index', compact('comics'));
     }
@@ -24,33 +25,45 @@ class ComicController extends Controller
     }
     public function store(Request $request)
     {
-
-        // recuperiamo i parametri che arrivano dal form
         $form_data = $request->all();
-
-        // dd($form_data);
-
-        // crea l'istanza, la popola con i dati e la salva nel db
         $new_comic = Comic::create($form_data);
 
-        // creare l'istanza di Pasta
-        // $new_pasta = new Pasta();
-
-        // // popoliamo l'istanza con i dati che sono arrivati dal form
-        // $new_pasta->title = $form_data['title'];
-        // $new_pasta->image = $form_data['image'];
-        // $new_pasta->weight = $form_data['weight'];
-        // $new_pasta->cooking_time = $form_data['cooking_time'];
-        // $new_pasta->description = $form_data['description'];
-        // $new_pasta->type = $form_data['type'];
-
+        // creare l'istanza di Comic
+        // $new_comic = new Comic();
+        // popoliamo l'istanza con i dati che sono arrivati dal form
+        // $new_comic->title = $form_data['title'];
+        // $new_comic->...
         // // salviamo l'istanza ->save()
-        // $new_pasta->save();
+        // $new_comic->save();
 
-        // dump($new_pasta);
-        // redirect alla rotta show di pasta 
-        // return redirect()->route('pastas.show', $new_pasta);
+        // redirect 
+        // return redirect()->route('comics.show', $new_comic);
+        // oppure
         return to_route('comics.show', $new_comic);
-        // return redirect()->route('pastas.index');
+    }
+    public function edit(Comic $comic)
+    {
+        return view('comics.edit', compact('comic'));
+    }
+
+    public function update(Request $request, Comic $comic)
+    {
+        $form_data = $request->all();
+
+        $comic->fill($form_data); //non salva automaticamente sul db
+        $comic->save();
+        // oppure
+        // $comic->update($form_data);
+
+        // redirect
+        return to_route('comics.show', $comic);
+    }
+
+    public function destroy(Comic $comic)
+    {
+        $comic->delete();
+
+        // redirect
+        return to_route('comics.index');
     }
 }
